@@ -11,24 +11,41 @@ var app = new Vue({
         colors:[
             {
                 colorID: 1,
-                colorName: "Degradado"
+                colorName: "Degradado",
+                colorImagen: "assets/strato_burn.jpg"
             },
             {
                 colorID: 2,
-                colorName: "Degradado 2"
+                colorName: "Degradado 2",
+                colorImagen: "assets/strato_2color.jpg"
             },
             {
                 colorID: 3,
-                colorName: "Negro"
+                colorName: "Negro",
+                colorImagen: "assets/strato_negra.jpg"
             },
             {
                 colorID: 4,
-                colorName: "Rojo"
+                colorName: "Rojo",
+                colorImagen: "assets/strato_roja.jpg"
             },
             {
                 colorID: 5,
-                colorName: "Celeste"
+                colorName: "Celeste",
+                colorImagen: "assets/strato_surfgreen.jpg"
             }
-        ]
+        ],
+        cart: 0
+    },
+    methods:{
+        agregarAlCarro: function () {
+            this.cart += 1
+        },
+        restarDelCarro () {
+            this.cart -= 1
+        },
+        cambiarImagen: function (colorImagen) {
+            this.image = colorImagen
+        }
     }
 })

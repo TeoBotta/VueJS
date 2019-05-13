@@ -26,11 +26,17 @@
 
             <p>Variantes de color:</p>
             <div v-for="color in colors" :key ="color.colorID">
-                <p>{{color.colorName}}</p>
+                <p @mouseover="cambiarImagen(color.colorImagen)">{{color.colorName}}</p>
             </div>
+        </div>
+        <button v-on:click="agregarAlCarro">+</button>
+        <button @click="restarDelCarro">-</button>
+        <div class="cart">
+            <p>Carro({{cart}})</p>
         </div>
     </div>
 </div>
+
 
 <script src="https://unpkg.com/vue"></script>
 <script src="main.js"></script>
