@@ -25,11 +25,11 @@
             </ul>
 
             <p>Variantes de color:</p>
-            <div v-for="color in colors" :key ="color.colorID">
-                <p @mouseover="cambiarImagen(color.colorImagen)">{{color.colorName}}</p>
+            <div v-for="color in colors" :key ="color.colorID" class="color-box" :style="{backgroundImage: color.colorBox}" @mouseover="cambiarImagen(color.colorImagen)">
+                <!-- <p @mouseover="cambiarImagen(color.colorImagen)">{{color.colorName}}</p> -->
             </div>
         </div>
-        <button v-on:click="agregarAlCarro">+</button>
+        <button v-on:click="agregarAlCarro" :disabled="!inStock" :class="{disabledButton: !inStock}">+</button>
         <button @click="restarDelCarro">-</button>
         <div class="cart">
             <p>Carro({{cart}})</p>

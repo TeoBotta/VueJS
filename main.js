@@ -12,27 +12,32 @@ var app = new Vue({
             {
                 colorID: 1,
                 colorName: "Degradado",
-                colorImagen: "assets/strato_burn.jpg"
+                colorImagen: "assets/strato_burn.jpg",
+                colorBox: "url(https://www.fmicassets.com/Damroot/Original/10001/brown-sunburst.png)"
             },
             {
                 colorID: 2,
                 colorName: "Degradado 2",
-                colorImagen: "assets/strato_2color.jpg"
+                colorImagen: "assets/strato_2color.jpg",
+                colorBox: "url(https://www.fmicassets.com/Damroot/Original/10001/2-color-sunburst.png)"
             },
             {
                 colorID: 3,
                 colorName: "Negro",
-                colorImagen: "assets/strato_negra.jpg"
+                colorImagen: "assets/strato_negra.jpg",
+                colorBox: "url(https://www.fmicassets.com/Damroot/Original/10001/black.png)"
             },
             {
                 colorID: 4,
                 colorName: "Rojo",
-                colorImagen: "assets/strato_roja.jpg"
+                colorImagen: "assets/strato_roja.jpg",
+                colorBox: "url(https://www.fmicassets.com/Damroot/Original/10002/race-red.png)"
             },
             {
                 colorID: 5,
                 colorName: "Celeste",
-                colorImagen: "assets/strato_surfgreen.jpg"
+                colorImagen: "assets/strato_surfgreen.jpg",
+                colorBox: "url(https://www.fmicassets.com/Damroot/Original/10003/surf-green.png)"
             }
         ],
         cart: 0
