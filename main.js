@@ -46,9 +46,6 @@ Vue.component('product',{
         </div>
         <button v-on:click="agregarAlCarro" :disabled="!inStock" :class="{disabledButton: !inStock}">+</button>
         <button @click="restarDelCarro">-</button>
-        <div class="cart">
-            <p>Carro({{cart}})</p>
-        </div>
     </div>
     `,
     data(){
@@ -61,50 +58,49 @@ Vue.component('product',{
             inventory: 20,
             colors:[
                 {
-                    colorID: 1,
+                    colorID: 0,
                     colorName: "Degradado",
                     colorImagen: "assets/strato_burn.jpg",
                     colorBox: "url(https://www.fmicassets.com/Damroot/Original/10001/brown-sunburst.png)",
                     colorCantidad:10
                 },
                 {
-                    colorID: 2,
+                    colorID: 1,
                     colorName: "Degradado 2",
                     colorImagen: "assets/strato_2color.jpg",
                     colorBox: "url(https://www.fmicassets.com/Damroot/Original/10001/2-color-sunburst.png)",
                     colorCantidad:7
                 },
                 {
-                    colorID: 3,
+                    colorID: 2,
                     colorName: "Negro",
                     colorImagen: "assets/strato_negra.jpg",
                     colorBox: "url(https://www.fmicassets.com/Damroot/Original/10001/black.png)",
                     colorCantidad:0
                 },
                 {
-                    colorID: 4,
+                    colorID: 3,
                     colorName: "Rojo",
                     colorImagen: "assets/strato_roja.jpg",
                     colorBox: "url(https://www.fmicassets.com/Damroot/Original/10002/race-red.png)",
                     colorCantidad:10
                 },
                 {
-                    colorID: 5,
+                    colorID: 4,
                     colorName: "Celeste",
                     colorImagen: "assets/strato_surfgreen.jpg",
                     colorBox: "url(https://www.fmicassets.com/Damroot/Original/10003/surf-green.png)",
                     colorCantidad:0
                 }
-            ],
-            cart: 0
+            ]
         }
     },
     methods:{
         agregarAlCarro: function () {
-            this.cart += 1
+            this.$emit('agregar-al-carro', this.colors[this.selectedColor].colorID)
         },
         restarDelCarro () {
-            this.cart -= 1
+            this.$emit('restar-al-carro', this.colors[this.selectedColor].colorID)
         },
         cambiarImagen: function (index) {
             this.selectedColor = index
@@ -126,5 +122,21 @@ Vue.component('product',{
 })
 
 var app = new Vue({
-    el:'#app'
+    el:'#app',
+    data: {
+        cart: []
+    },
+    methods: {
+        actualizarCarroS (id){
+            this.cart.push(id),
+        },
+        actualizarCarroR (id) {
+            for(i=0; i<this.cart.length; i++){
+                if(this.cart[i] == id){
+                    this.cart.splice(i,1);
+                    break;
+                }
+            }
+        }
+    }
 })

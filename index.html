@@ -3,7 +3,10 @@
 <div class="nav-bar">VueGuitars</div>
 
 <div id="app">
-    <product></product>
+    <div class="cart">
+        <p>Carro({{cart.length}})</p>
+    </div>
+    <product @agregar-al-carro="actualizarCarroS" @restar-al-carro="actualizarCarroR"></product>
 </div>
 
 
