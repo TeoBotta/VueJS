@@ -5,9 +5,14 @@ body {
   }
   
   .nav-bar {
-    background: linear-gradient(-90deg, #84CF6A, #16C0B0);
+    background: linear-gradient(-90deg, #3875BE, #322F2E);
     height: 60px;
     margin-bottom: 15px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: left;
+    vertical-align: text-bottom;
+    font-size: 30px;
+    color: #CDC7C5;
   }
 
   .product {
