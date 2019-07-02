@@ -95,3 +95,8 @@ body {
     color: #16C0B0;
     text-decoration: underline;
   }
+
+  .radd {
+    width: 25px;
+    height: 15px;
+  }

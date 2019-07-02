@@ -44,8 +44,23 @@ Vue.component('product',{
                 <!-- <p @mouseover="cambiarImagen(color.colorImagen)">{{color.colorName}}</p> -->
             </div>
         </div>
-        <button v-on:click="agregarAlCarro" :disabled="!inStock" :class="{disabledButton: !inStock}">+</button>
-        <button @click="restarDelCarro">-</button>
+
+            <button v-on:click="agregarAlCarro" :disabled="!inStock" :class="{disabledButton: !inStock}">+</button>
+            <button @click="restarDelCarro">-</button>
+
+        <div>
+            <h2>Reviews</h2>
+            <p v-if="!resenias.length">No hay reviews sobre este producto</p>
+            <ul>
+                <li v-for="resenia in resenias">
+                <p>Usuario: {{resenia.name}}</p>
+                <p>Opinion: {{resenia.review}}</p>
+                <p>Puntaje: {{resenia.rating}}</p>
+                <p>Recomendaria: {{resenia.reco}}</p>
+                </li>
+            </ul>
+        </div>
+        <review @review-submitted="agregarReview"></review>
     </div>
     `,
     data(){
@@ -92,7 +107,8 @@ Vue.component('product',{
                     colorBox: "url(https://www.fmicassets.com/Damroot/Original/10003/surf-green.png)",
                     colorCantidad:0
                 }
-            ]
+            ],
+            resenias:[]
         }
     },
     methods:{
@@ -105,6 +121,9 @@ Vue.component('product',{
         cambiarImagen: function (index) {
             this.selectedColor = index
             console.log(index)
+        },
+        agregarReview (productReview) {
+            this.resenias.push(productReview)
         }
     },
     computed: {
@@ -120,6 +139,81 @@ Vue.component('product',{
     }
 
 })
+ 
+Vue.component('review', {
+    template:`
+    <form class="review-form" @submit.prevent="onSubmit">
+        <p v-if="errors">
+            <b>Falta completar los siguientes campos:</b>
+            <ul>
+                <li v-for="error in errors">{{error}}</li>
+            </ul>
+        </p>
+        <p>
+            <label for="name">Nombre:</label>
+            <input id="name" v-model="name" placeholder="name">
+        </p>
+        <p>
+            <label for="review">Review:</label>
+            <textarea id="review" v-model="review"></textarea>
+        </p>
+        <p>
+            <label for="rating">Puntaje:</label>
+            <select id="rating" v-model.number="rating">
+                <option>5</option>
+                <option>4</option>
+                <option>3</option>
+                <option>2</option>
+                <option>1</option>
+            </select>
+        </p>
+        <p>
+            <label for="reco">Recomendaria el producto?</label>
+            <select id="reco" v-model.number="reco">
+                <option>Si</option>
+                <option>No</option>
+            </select>
+        </p>
+        <p>
+            <input type="submit" value="Submit">
+        </p>
+    </form>
+    `,
+    data() {
+        return {
+            name: null,
+            review: null,
+            rating: null,
+            reco: null,
+            errors:[]
+        }
+    },
+    methods:{
+        onSubmit() {
+            if(this.name && this.review && this.rating && this.reco){
+                let productReview = {
+                    name: this.name,
+                    review: this.review,
+                    rating: this.rating,
+                    reco: this.reco,
+                }
+                this.$emit('review-submitted', productReview)
+                this.name=null
+                this.review=null
+                this.rating=null
+                this.reco=null
+                this.errors=[]
+            } else {
+                this.errors=[]
+                if(!this.name) this.errors.push("Se debe ingresar un nombre")
+                if(!this.review) this.errors.push("Se debe ingresar una opinion")
+                if(!this.rating) this.errors.push("Se debe ingresar un puntaje")
+                if(!this.reco) this.errors.push("Se debe ingresar una opcion de recomendacion")
+            }
+        }
+    }
+})
+
 
 var app = new Vue({
     el:'#app',
@@ -128,7 +222,7 @@ var app = new Vue({
     },
     methods: {
         actualizarCarroS (id){
-            this.cart.push(id),
+            this.cart.push(id)
         },
         actualizarCarroR (id) {
             for(i=0; i<this.cart.length; i++){
